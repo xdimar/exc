@@ -1,0 +1,777 @@
+/* --- ROOT & GLOBAL STYLES --- */
+:root {
+  --netflix-black: #141414;
+  --netflix-red: #e50914;
+  --netflix-white: #ffffff;
+  --netflix-gray: #333333;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* Sangat penting untuk perhitungan layout yang konsisten */
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+  background-color: var(--netflix-black);
+  color: var(--netflix-white);
+  overflow-x: hidden; /* --- LANGKAH KRUSIAL: CEGAH SCROLL HORIZONTAL --- */
+  line-height: 1.6;
+}
+
+/* --- LOADING SCREEN --- */
+.loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--netflix-black);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  transition: opacity 1s ease;
+}
+.loading-screen.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+.netflix-logo {
+    width: 150px; /* Atur lebar logo sesuai keinginan Anda */
+    height: auto; /* Biarkan tinggi menyesuaikan agar tidak pecah */
+    margin-bottom: 2rem;
+}
+.loading-bar {
+  width: 200px;
+  height: 4px;
+  background-color: var(--netflix-gray);
+  position: relative;
+  overflow: hidden;
+}
+.loading-progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0%;
+  background-color: var(--netflix-red);
+  animation: loading 2s ease-in-out forwards;
+}
+@keyframes loading {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+/* --- HERO SECTION --- */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  padding: 1rem;
+  text-align: center;
+}
+.hero-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url("https://picsum.photos/seed/wedding/800/1200.jpg")
+    center/cover no-repeat;
+  filter: brightness(0.4);
+  z-index: -1;
+}
+.hero-content {
+  max-width: 800px; /* Batasi lebar maksimal agar teks tidak terlalu lebar di desktop */
+}
+.hero-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  letter-spacing: -1px;
+  word-wrap: break-word;
+}
+.hero-subtitle {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  opacity: 0.9;
+}
+.hero-date {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  color: var(--netflix-red);
+}
+
+/* --- COUNTDOWN --- */
+.hero .countdown {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap; /* --- BIARKAN COUNTDOWN TURUN KE BAWAH JIKA PERLU --- */
+  gap: 1rem;
+  margin-top: 2rem;
+  background-color: rgba(20, 20, 20, 0.7);
+  padding: 1.5rem;
+  border-radius: 8px;
+  backdrop-filter: blur(5px);
+}
+.hero .countdown-item {
+  text-align: center;
+  min-width: 70px;
+} /* Beri lebar minimum agar tidak terlalu kecil */
+.hero .countdown-number {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--netflix-red);
+  display: block;
+}
+.hero .countdown-label {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+/* --- BUTTONS --- */
+.btn {
+  display: inline-block;
+  padding: 0.8rem 2rem;
+  background-color: var(--netflix-red);
+  color: var(--netflix-white);
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+}
+.btn:hover {
+  background-color: #f40612;
+  transform: translateY(-2px);
+}
+.btn-outline {
+  background-color: transparent;
+  border: 2px solid var(--netflix-white);
+}
+.btn-outline:hover {
+  background-color: var(--netflix-white);
+  color: var(--netflix-black);
+}
+
+/* --- SECTIONS --- */
+section {
+  padding: 4rem 1rem; /* Gunakan padding yang lebih kecil di kiri/kanan */
+}
+.section-title {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 3rem;
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+.section-title::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background-color: var(--netflix-red);
+}
+
+/* --- COUPLE SECTION --- */
+.couple-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+.couple-card {
+  background-color: var(--netflix-gray);
+  border-radius: 8px;
+  overflow: hidden;
+  width: 100%;
+  max-width: 350px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease;
+}
+.couple-card:hover {
+  transform: translateY(-5px);
+}
+.couple-img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+.couple-info {
+  padding: 1.5rem;
+}
+.couple-name {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+.couple-desc {
+  font-size: 1rem;
+  opacity: 0.9;
+  line-height: 1.5;
+}
+.and {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--netflix-red);
+  margin: 1rem 0;
+}
+
+/* --- EVENT SECTION --- */
+.event-card {
+  background-color: var(--netflix-black);
+  border-radius: 8px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+.event-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--netflix-red);
+}
+.event-detail {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.event-detail i {
+  margin-right: 1rem;
+  color: var(--netflix-red);
+  font-size: 1.2rem;
+  width: 24px;
+  flex-shrink: 0;
+} /* flex-shrink: 0 mencegah icon menyusut */
+.event-text {
+  font-size: 1rem;
+  line-height: 1.5;
+  word-wrap: break-word;
+}
+
+/* --- GALLERY SECTION --- */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(250px, 1fr)
+  ); /* --- LEBIH FLEKSIBEL DARI repeat(2, 1fr) --- */
+  gap: 1rem;
+}
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  height: 200px;
+}
+.gallery-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+.gallery-item:hover .gallery-img {
+  transform: scale(1.05);
+}
+.gallery-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.7));
+  display: flex;
+  align-items: flex-end;
+  padding: 1rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.gallery-item:hover .gallery-overlay {
+  opacity: 1;
+}
+.gallery-text {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+/* --- FORMS (RSVP & MODAL) --- */
+.rsvp-form {
+  max-width: 500px;
+  margin: 0 auto;
+}
+.form-group {
+  margin-bottom: 1.5rem;
+}
+.form-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+.form-control {
+  width: 100%;
+  padding: 0.8rem;
+  background-color: var(--netflix-black);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  color: var(--netflix-white);
+  font-family: inherit;
+  font-size: 1rem;
+}
+.form-control:focus {
+  outline: none;
+  border-color: var(--netflix-red);
+}
+.radio-group {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+} /* Biarkan turun ke bawah */
+.radio-option {
+  display: flex;
+  align-items: center;
+}
+.radio-option input {
+  margin-right: 0.5rem;
+}
+
+/* --- WISHES SECTION --- */
+.wishes-container {
+  max-width: 500px;
+  margin: 0 auto;
+}
+.wish-card {
+  background-color: var(--netflix-gray);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.wish-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.wish-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--netflix-red);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 1rem;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+.wish-name {
+  font-weight: 600;
+}
+.wish-date {
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+.wish-content {
+  line-height: 1.5;
+  word-wrap: break-word;
+}
+
+/* --- DONATION SECTION --- */
+.bank-cards-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-width: 500px;
+  margin: 0 auto;
+}
+.bank-card {
+  background-color: var(--netflix-black);
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+.bank-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background-color: var(--netflix-red);
+}
+.bank-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.bank-logo {
+  font-size: 2rem;
+  color: var(--netflix-red);
+  margin-right: 1rem;
+  flex-shrink: 0;
+}
+.bank-name {
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+.bank-info {
+  margin-bottom: 1rem;
+}
+.bank-label {
+  font-size: 0.9rem;
+  opacity: 0.7;
+  margin-bottom: 0.3rem;
+}
+.bank-detail {
+  font-size: 1.1rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap; /* Biarkan turun ke bawah jika perlu */
+  gap: 0.5rem;
+}
+.account-number {
+  font-family: "Courier New", monospace;
+  letter-spacing: 1px;
+  word-wrap: break-word;
+}
+.btn-copy {
+  background-color: var(--netflix-red);
+  color: var(--netflix-white);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+.btn-copy:hover {
+  background-color: #f40612;
+}
+.btn-copy.copied {
+  background-color: #4caf50;
+}
+.copied-notification {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #4caf50;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+.copied-notification.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --- CLOSING SECTION --- */
+.closing-content {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+.closing-preface {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  opacity: 0.9;
+}
+.closing-verse {
+  font-size: 1.3rem;
+  line-height: 1.6;
+  font-style: italic;
+  margin: 1.5rem 0;
+  padding: 0 1rem;
+  border-left: 3px solid var(--netflix-red);
+  text-align: left;
+  word-wrap: break-word;
+}
+.closing-reference {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--netflix-red);
+  margin-top: 1rem;
+  text-align: right;
+}
+
+/* --- FOOTER --- */
+footer {
+  padding: 2rem;
+  background-color: var(--netflix-gray);
+  text-align: center;
+}
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.social-link {
+  color: var(--netflix-white);
+  font-size: 1.5rem;
+  transition: color 0.3s ease;
+}
+.social-link:hover {
+  color: var(--netflix-red);
+}
+.copyright {
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
+
+/* --- MUSIC PLAYER --- */
+.music-player {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  background-color: var(--netflix-red);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 100;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+.music-player i {
+  color: var(--netflix-white);
+  font-size: 1.5rem;
+}
+.music-player.playing i::before {
+  content: "\f04c";
+}
+
+/* --- MODAL --- */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  padding: 1rem; /* Tambahkan padding di modal */
+}
+.modal.active {
+  opacity: 1;
+  visibility: visible;
+}
+.modal-content {
+  background-color: var(--netflix-gray);
+  border-radius: 8px;
+  padding: 2rem;
+  width: 90%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+  transform: scale(0.8);
+  transition: transform 0.3s ease;
+}
+.modal.active .modal-content {
+  transform: scale(1);
+}
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+.modal-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+.modal-close {
+  background: none;
+  border: none;
+  color: var(--netflix-white);
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* --- NOTIFICATION SYSTEM --- */
+.notification-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.notification {
+  background-color: var(--netflix-gray);
+  color: var(--netflix-white);
+  padding: 1rem 1.5rem;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  min-width: 300px;
+  max-width: 90vw; /* Batasi lebar maksimal di mobile */
+  opacity: 0;
+  transform: translateX(100%);
+  transition: all 0.3s ease-in-out;
+  border-left: 5px solid var(--netflix-white);
+}
+.notification.show {
+  opacity: 1;
+  transform: translateX(0);
+}
+.notification.success {
+  border-left-color: #4caf50;
+}
+.notification.error {
+  border-left-color: #f44336;
+}
+.notification .notification-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+.notification .notification-close {
+  background: none;
+  border: none;
+  color: var(--netflix-white);
+  font-size: 1.2rem;
+  cursor: pointer;
+  opacity: 0.7;
+}
+.notification .notification-close:hover {
+  opacity: 1;
+}
+
+/* --- PAGINATION --- */
+.pagination-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin: 1.5rem 0;
+  list-style: none;
+  padding: 0;
+  flex-wrap: wrap;
+}
+.pagination-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 36px;
+  height: 36px;
+  padding: 0 8px;
+  background-color: var(--netflix-gray);
+  color: var(--netflix-white);
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+.pagination-link:hover {
+  background-color: var(--netflix-red);
+  transform: translateY(-2px);
+}
+.pagination-link.active {
+  background-color: var(--netflix-red);
+  font-weight: 700;
+  pointer-events: none;
+}
+.pagination-link.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+/* --- ANIMATIONS --- */
+.fade-in {
+  opacity: 0;
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.fade-in.active {
+  opacity: 1;
+  transform: translateY(0) translateX(0);
+}
+.fade-in-bottom {
+  transform: translateY(30px);
+}
+.fade-in-left {
+  transform: translateX(-30px);
+}
+.fade-in-right {
+  transform: translateX(30px);
+}
+
+/* --- RESPONSIVE DESIGN --- */
+@media (min-width: 768px) {
+  section {
+    padding: 4rem 2rem;
+  }
+  .hero-title {
+    font-size: 3rem;
+  }
+  .hero-subtitle {
+    font-size: 1.5rem;
+  }
+  .couple-container {
+    flex-direction: row;
+    justify-content: center;
+  }
+  .gallery-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+/* --- Tambahkan kode ini di bagian bawah file admin-style.css --- */
+
+.event-link {
+    text-decoration: none;
+    color: inherit; /* Mewarisi warna teks dari parent */
+    display: flex;
+    align-items: center;
+    transition: color 0.3s ease;
+}
+
+.event-link:hover {
+    color: var(--netflix-red); /* Ganti dengan warna merah tema Anda jika ada */
+}
+
+.event-link:hover .event-text {
+    text-decoration: underline;
+}
