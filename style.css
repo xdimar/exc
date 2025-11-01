@@ -5,6 +5,12 @@
   --netflix-white: #ffffff;
   --netflix-gray: #333333;
 }
+html {
+    margin: 0;
+    padding: 0;
+    /* padding-right: -10px; */
+    overflow-x: hidden; /* --- LANGKAH KRUSIAL: CEGAH SCROLL HORIZONTAL --- */
+}
 
 * {
   margin: 0;
